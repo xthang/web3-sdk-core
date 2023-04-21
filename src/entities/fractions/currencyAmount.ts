@@ -1,4 +1,4 @@
-import invariant from 'tiny-invariant'
+import assert from 'assert'
 import JSBI from 'jsbi'
 import { Currency } from '../currency'
 import { Token } from '../token'
@@ -39,19 +39,19 @@ export class CurrencyAmount<T extends Currency> extends Fraction {
 
   protected constructor(currency: T, numerator: BigintIsh, denominator?: BigintIsh) {
     super(numerator, denominator)
-    invariant(JSBI.lessThanOrEqual(this.quotient, MaxUint256), 'AMOUNT')
+    assert(JSBI.lessThanOrEqual(this.quotient, MaxUint256), 'AMOUNT')
     this.currency = currency
     this.decimalScale = JSBI.exponentiate(JSBI.BigInt(10), JSBI.BigInt(currency.decimals))
   }
 
   public add(other: CurrencyAmount<T>): CurrencyAmount<T> {
-    invariant(this.currency.equals(other.currency), 'CURRENCY')
+    assert(this.currency.equals(other.currency), 'CURRENCY')
     const added = super.add(other)
     return CurrencyAmount.fromFractionalAmount(this.currency, added.numerator, added.denominator)
   }
 
   public subtract(other: CurrencyAmount<T>): CurrencyAmount<T> {
-    invariant(this.currency.equals(other.currency), 'CURRENCY')
+    assert(this.currency.equals(other.currency), 'CURRENCY')
     const subtracted = super.subtract(other)
     return CurrencyAmount.fromFractionalAmount(this.currency, subtracted.numerator, subtracted.denominator)
   }
@@ -79,7 +79,7 @@ export class CurrencyAmount<T extends Currency> extends Fraction {
     format?: object,
     rounding: Rounding = Rounding.ROUND_DOWN
   ): string {
-    invariant(decimalPlaces <= this.currency.decimals, 'DECIMALS')
+    assert(decimalPlaces <= this.currency.decimals, 'DECIMALS')
     return super.divide(this.decimalScale).toFixed(decimalPlaces, format, rounding)
   }
 

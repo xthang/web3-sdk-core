@@ -5,8 +5,8 @@ describe('#computePriceImpact', () => {
   const ADDRESS_ZERO = '0x0000000000000000000000000000000000000000'
   const ADDRESS_ONE = '0x0000000000000000000000000000000000000001'
 
-  const t0 = new Token(1, ADDRESS_ZERO, 18)
-  const t1 = new Token(1, ADDRESS_ONE, 18)
+  const t0 = new Token('eip155:1', ADDRESS_ZERO, 18)
+  const t1 = new Token('eip155:1', ADDRESS_ONE, 18)
 
   it('is correct for zero', () => {
     expect(

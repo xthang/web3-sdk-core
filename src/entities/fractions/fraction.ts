@@ -1,10 +1,10 @@
 import JSBI from 'jsbi'
-import invariant from 'tiny-invariant'
 import _Decimal from 'decimal.js-light'
 import _Big, { RoundingMode } from 'big.js'
 import toFormat from 'toformat'
 
 import { BigintIsh, Rounding } from '../../constants'
+import assert from 'assert'
 
 const Decimal = toFormat(_Decimal)
 const Big = toFormat(_Big)
@@ -125,8 +125,8 @@ export class Fraction {
     format: object = { groupSeparator: '' },
     rounding: Rounding = Rounding.ROUND_HALF_UP
   ): string {
-    invariant(Number.isInteger(significantDigits), `${significantDigits} is not an integer.`)
-    invariant(significantDigits > 0, `${significantDigits} is not positive.`)
+    assert(Number.isInteger(significantDigits), `${significantDigits} is not an integer.`)
+    assert(significantDigits > 0, `${significantDigits} is not positive.`)
 
     Decimal.set({ precision: significantDigits + 1, rounding: toSignificantRounding[rounding] })
     const quotient = new Decimal(this.numerator.toString())
@@ -140,8 +140,8 @@ export class Fraction {
     format: object = { groupSeparator: '' },
     rounding: Rounding = Rounding.ROUND_HALF_UP
   ): string {
-    invariant(Number.isInteger(decimalPlaces), `${decimalPlaces} is not an integer.`)
-    invariant(decimalPlaces >= 0, `${decimalPlaces} is negative.`)
+    assert(Number.isInteger(decimalPlaces), `${decimalPlaces} is not an integer.`)
+    assert(decimalPlaces >= 0, `${decimalPlaces} is negative.`)
 
     Big.DP = decimalPlaces
     Big.RM = toFixedRounding[rounding]

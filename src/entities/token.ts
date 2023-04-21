@@ -1,14 +1,14 @@
-import invariant from 'tiny-invariant'
-import { checkValidAddress, validateAndParseAddress } from '../utils/validateAndParseAddress'
+import assert from 'assert'
 import { BaseCurrency } from './baseCurrency'
 import { Currency } from './currency'
+import { checkValidAddress, validateAndParseAddress } from '../utils'
 
 /**
  * Represents an ERC20 token with a unique address and some metadata.
  */
 export class Token extends BaseCurrency {
-  public readonly isNative: false = false
-  public readonly isToken: true = true
+  public readonly isNative = false
+  public readonly isToken = true
 
   /**
    * The contract address on the chain on which this token lives
@@ -25,7 +25,7 @@ export class Token extends BaseCurrency {
    * @param bypassChecksum If true it only checks for length === 42, startsWith 0x and contains only hex characters
    */
   public constructor(
-    chainId: number,
+    chainId: string,
     address: string,
     decimals: number,
     symbol?: string,
@@ -33,10 +33,11 @@ export class Token extends BaseCurrency {
     bypassChecksum?: boolean
   ) {
     super(chainId, decimals, symbol, name)
+
     if (bypassChecksum) {
-      this.address = checkValidAddress(address)
+      this.address = checkValidAddress(this.type, address)
     } else {
-      this.address = validateAndParseAddress(address)
+      this.address = validateAndParseAddress(this.type, address)
     }
   }
 
@@ -55,8 +56,8 @@ export class Token extends BaseCurrency {
    * @throws if the tokens are on different chains
    */
   public sortsBefore(other: Token): boolean {
-    invariant(this.chainId === other.chainId, 'CHAIN_IDS')
-    invariant(this.address.toLowerCase() !== other.address.toLowerCase(), 'ADDRESSES')
+    assert(this.chainId === other.chainId, 'CHAIN_IDS')
+    assert(this.address.toLowerCase() !== other.address.toLowerCase(), 'ADDRESSES')
     return this.address.toLowerCase() < other.address.toLowerCase()
   }
 

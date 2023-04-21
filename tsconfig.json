@@ -1,5 +1,4 @@
 {
-  "include": ["src"],
   "compilerOptions": {
     "target": "es2018",
     "module": "esnext",
@@ -18,6 +17,13 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "moduleResolution": "node",
-    "esModuleInterop": true
-  }
+    "esModuleInterop": true,
+    "baseUrl": "",
+    "typeRoots": ["./node_modules/@types", "./node_modules/@types-x"],
+    "paths": {
+      "*": ["./node_modules/@types-x/*"]
+    }
+  },
+  "include": ["src"],
+  "exclude": ["ignore"]
 }

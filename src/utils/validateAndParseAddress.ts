@@ -1,6 +1,6 @@
 import { getAddress } from '@ethersproject/address'
 import TronWeb from 'tronweb'
-import { NetworkStandard } from '../entities/network'
+import { XError, NetworkStandard } from '../entities'
 
 /**
  * Validates an address and returns the parsed (checksummed) version of that address
@@ -9,9 +9,17 @@ import { NetworkStandard } from '../entities/network'
 export function validateAndParseAddress(type: NetworkStandard, address: string): string {
   try {
     if (type === NetworkStandard.eip155) return getAddress(address)
-    else if (type === NetworkStandard.tron && TronWeb.isAddress(address)) return address
-    else throw new Error()
+    else if (type === NetworkStandard.solana) {
+      if (TronWeb.isAddress(address)) return address
+      else throw new Error()
+    } else if (type === NetworkStandard.tron) {
+      if (TronWeb.isAddress(address)) return address
+      else throw new Error()
+    }
+
+    throw new XError('NETWORK_STANDARD_NOT_SUPPORTED', `${type} is not supported`)
   } catch (error) {
+    if (error instanceof XError) throw error
     throw new Error(`${address} is not a valid address.`)
   }
 }
@@ -24,11 +32,22 @@ const startsWith0xLen42HexRegex = /^0x[0-9a-fA-F]{40}$/
  * @param address the unchecksummed hex address
  */
 export function checkValidAddress(type: NetworkStandard, address: string): string {
-  if (type === NetworkStandard.eip155 && startsWith0xLen42HexRegex.test(address)) {
-    return address
-  } else if (type === NetworkStandard.tron && TronWeb.isAddress(address)) {
-    return address
+  if (type === NetworkStandard.eip155) {
+    if (startsWith0xLen42HexRegex.test(address)) {
+      return address
+    }
+    throw new Error(`${address} is not a valid eip155 address.`)
+  } else if (type === NetworkStandard.solana) {
+    if (TronWeb.isAddress(address)) {
+      return address
+    }
+    throw new Error(`${address} is not a Solana address.`)
+  } else if (type === NetworkStandard.tron) {
+    if (TronWeb.isAddress(address)) {
+      return address
+    }
+    throw new Error(`${address} is not a valid Tron address.`)
   }
 
-  throw new Error(`${address} is not a valid address.`)
+  throw new Error(`${type} is not supported`)
 }

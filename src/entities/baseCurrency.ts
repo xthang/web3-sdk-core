@@ -1,12 +1,12 @@
 import assert from 'assert'
-import { NetworkStandard } from './network'
+import { ChainNamespace } from './network'
 import { Token } from './token'
 
 /**
  * A currency is any fungible financial instrument, including Ether, all ERC20 tokens, and other chain-native currencies
  */
 export abstract class BaseCurrency {
-  public readonly type: NetworkStandard
+  public readonly type: ChainNamespace
   /**
    * The chain ID on which this currency resides
    */
@@ -51,10 +51,10 @@ export abstract class BaseCurrency {
     this.symbol = symbol
     this.name = name
 
-    const [networkStandard, chainId_] = chainId.split(':')
-    assert(networkStandard in NetworkStandard, 'INVALID_NETWORK_STANDARD')
-    this.type = NetworkStandard[networkStandard as NetworkStandard]
-    this.chainId_ = this.type === NetworkStandard.eip155 ? parseInt(chainId_):chainId_
+    const [chainNamespace, chainId_] = chainId.split(':')
+    assert(chainNamespace in ChainNamespace, 'INVALID_NETWORK_STANDARD')
+    this.type = ChainNamespace[chainNamespace as ChainNamespace]
+    this.chainId_ = this.type === ChainNamespace.eip155 ? parseInt(chainId_):chainId_
   }
 
   /**

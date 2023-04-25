@@ -1,18 +1,18 @@
 import { getAddress } from '@ethersproject/address'
 import TronWeb from 'tronweb'
-import { XError, NetworkStandard } from '../entities'
+import { XError, ChainNamespace } from '../entities'
 
 /**
  * Validates an address and returns the parsed (checksummed) version of that address
  * @param address the unchecksummed hex address
  */
-export function validateAndParseAddress(type: NetworkStandard, address: string): string {
+export function validateAndParseAddress(type: ChainNamespace, address: string): string {
   try {
-    if (type === NetworkStandard.eip155) return getAddress(address)
-    else if (type === NetworkStandard.solana) {
+    if (type === ChainNamespace.eip155) return getAddress(address)
+    else if (type === ChainNamespace.solana) {
       if (TronWeb.isAddress(address)) return address
       else throw new Error()
-    } else if (type === NetworkStandard.tron) {
+    } else if (type === ChainNamespace.tron) {
       if (TronWeb.isAddress(address)) return address
       else throw new Error()
     }
@@ -31,18 +31,18 @@ const startsWith0xLen42HexRegex = /^0x[0-9a-fA-F]{40}$/
  * Checks if an address is valid by checking 0x prefix, length === 42 and hex encoding.
  * @param address the unchecksummed hex address
  */
-export function checkValidAddress(type: NetworkStandard, address: string): string {
-  if (type === NetworkStandard.eip155) {
+export function checkValidAddress(type: ChainNamespace, address: string): string {
+  if (type === ChainNamespace.eip155) {
     if (startsWith0xLen42HexRegex.test(address)) {
       return address
     }
     throw new Error(`${address} is not a valid eip155 address.`)
-  } else if (type === NetworkStandard.solana) {
+  } else if (type === ChainNamespace.solana) {
     if (TronWeb.isAddress(address)) {
       return address
     }
     throw new Error(`${address} is not a Solana address.`)
-  } else if (type === NetworkStandard.tron) {
+  } else if (type === ChainNamespace.tron) {
     if (TronWeb.isAddress(address)) {
       return address
     }

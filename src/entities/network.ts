@@ -1,4 +1,4 @@
-export enum NetworkStandard {
+export enum ChainNamespace {
   eip155 = 'eip155',
   solana = 'solana',
   polkadot = 'polkadot',

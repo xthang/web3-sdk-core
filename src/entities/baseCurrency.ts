@@ -6,12 +6,12 @@ import { Token } from './token'
  * A currency is any fungible financial instrument, including Ether, all ERC20 tokens, and other chain-native currencies
  */
 export abstract class BaseCurrency {
-  public readonly type: ChainNamespace
+  public readonly chainNamespace: ChainNamespace
   /**
    * The chain ID on which this currency resides
    */
   public readonly chainId: string
-  public readonly chainId_: number | string
+  public readonly chainId_: number | bigint
 
   /**
    * Returns whether the currency is native to the chain and must be wrapped (e.g. Ether)
@@ -52,9 +52,9 @@ export abstract class BaseCurrency {
     this.name = name
 
     const [chainNamespace, chainId_] = chainId.split(':')
-    assert(chainNamespace in ChainNamespace, 'INVALID_NETWORK_STANDARD')
-    this.type = ChainNamespace[chainNamespace as ChainNamespace]
-    this.chainId_ = this.type === ChainNamespace.eip155 ? parseInt(chainId_):chainId_
+    assert(chainNamespace in ChainNamespace, 'INVALID_CHAIN_NAMESPACE')
+    this.chainNamespace = ChainNamespace[chainNamespace as ChainNamespace]
+    this.chainId_ = BigInt(chainId_)
   }
 
   /**

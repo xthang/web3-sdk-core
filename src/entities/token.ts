@@ -1,7 +1,7 @@
 import assert from 'assert'
+import { checkValidAddress, validateAndParseAddress } from '../utils'
 import { BaseCurrency } from './baseCurrency'
 import { Currency } from './currency'
-import { checkValidAddress, validateAndParseAddress } from '../utils'
 
 /**
  * Represents an ERC20 token with a unique address and some metadata.
@@ -35,9 +35,9 @@ export class Token extends BaseCurrency {
     super(chainId, decimals, symbol, name)
 
     if (bypassChecksum) {
-      this.address = checkValidAddress(this.type, address)
+      this.address = checkValidAddress(this.chainNamespace, address)
     } else {
-      this.address = validateAndParseAddress(this.type, address)
+      this.address = validateAndParseAddress(this.chainNamespace, address)
     }
   }
 

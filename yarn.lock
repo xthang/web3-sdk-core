@@ -1938,10 +1938,10 @@
     "@typescript-eslint/types" "6.7.0"
     eslint-visitor-keys "^3.4.1"
 
-"@web3-x/web3.js@^6.3.1-beta.6":
-  version "6.3.1-beta.6"
-  resolved "https://registry.yarnpkg.com/@web3-x/web3.js/-/web3.js-6.3.1-beta.6.tgz#ee37cd4c5d77cce48edf39633b6f7cc2d93c35d6"
-  integrity sha512-BA93ZD7UYM+STSvnOqEip07ng3pTbmkLFj2svXfAzotMRGdfxXM/CxCkvHDptZ3zNng8qmn/ezB7AVuruYQ6/g==
+"@web3-x/web3.js@^6.3.1-beta.8":
+  version "6.3.1-beta.8"
+  resolved "https://registry.yarnpkg.com/@web3-x/web3.js/-/web3.js-6.3.1-beta.8.tgz#c8a041a16a9bf964360568a5cf4f88dba2d379da"
+  integrity sha512-/F7ygTWf32bGID6fdvcfXdRIFv1NgYL94mDaO2hqy8YwCNWDEJ5frwU+aZK3WNZ7fFtN9oG27QF8vyN/LwstZg==
   dependencies:
     "@adraffy/ens-normalize" "1.9.0"
     "@noble/hashes" "1.1.2"

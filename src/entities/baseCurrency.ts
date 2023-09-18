@@ -54,7 +54,7 @@ export abstract class BaseCurrency {
     const [chainNamespace, chainId_] = chainId.split(':')
     assert(chainNamespace in ChainNamespace, 'INVALID_CHAIN_NAMESPACE')
     this.chainNamespace = ChainNamespace[chainNamespace as ChainNamespace]
-    this.chainId_ = BigInt(chainId_)
+    this.chainId_ = parseInt(chainId_)
   }
 
   /**

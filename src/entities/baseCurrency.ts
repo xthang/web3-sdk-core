@@ -1,5 +1,5 @@
 import assert from 'assert'
-import { ChainNamespace } from './network'
+import { ChainName, ChainNamespace } from './network'
 import { Token } from './token'
 
 /**
@@ -10,7 +10,7 @@ export abstract class BaseCurrency {
   /**
    * The chain ID on which this currency resides
    */
-  public readonly chainId: string
+  public readonly chainId: ChainName
   public readonly chainId_: number | bigint
 
   /**
@@ -42,7 +42,7 @@ export abstract class BaseCurrency {
    * @param symbol symbol of the currency
    * @param name of the currency
    */
-  protected constructor(chainId: string, decimals: number, symbol?: string, name?: string) {
+  protected constructor(chainId: ChainName, decimals: number, symbol?: string, name?: string) {
     assert(typeof chainId === 'string' || Number.isSafeInteger(chainId), 'CHAIN_ID')
     assert(decimals >= 0 && decimals < 255 && Number.isInteger(decimals), 'DECIMALS')
 

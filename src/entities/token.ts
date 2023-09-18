@@ -2,6 +2,7 @@ import assert from 'assert'
 import { checkValidAddress, validateAndParseAddress } from '../utils'
 import { BaseCurrency } from './baseCurrency'
 import { Currency } from './currency'
+import { ChainName } from './network'
 
 /**
  * Represents an ERC20 token with a unique address and some metadata.
@@ -25,7 +26,7 @@ export class Token extends BaseCurrency {
    * @param bypassChecksum If true it only checks for length === 42, startsWith 0x and contains only hex characters
    */
   public constructor(
-    chainId: string,
+    chainId: ChainName,
     address: string,
     decimals: number,
     symbol?: string,

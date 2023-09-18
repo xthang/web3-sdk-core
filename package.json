@@ -1,7 +1,7 @@
 {
   "name": "@web3-x/sdk-core",
   "license": "MIT",
-  "version": "3.2.2-beta.10",
+  "version": "3.2.2-beta.11",
   "description": "⚒️ An SDK for building applications on top of Uniswap V3",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -22,7 +22,7 @@
     "prepublishOnly": "tsdx build"
   },
   "dependencies": {
-    "@web3-x/web3.js": "^6.3.1-beta.3",
+    "@web3-x/web3.js": "^6.3.1-beta.5",
     "big.js": "^5.2.2",
     "decimal.js-light": "^2.5.0",
     "jsbi": "^3.1.4",
@@ -36,6 +36,7 @@
     "eslint": "^8.38.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-unused-imports": "^2.0.0",
     "tsdx": "^0.14.1"
   },

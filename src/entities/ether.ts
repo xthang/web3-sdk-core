@@ -19,7 +19,7 @@ export class Ether extends NativeCurrency {
     return weth9
   }
 
-  private static _etherCache: { [chainId: ChainName]: Ether } = {}
+  private static _etherCache: { [chainId: string]: Ether } = {}
 
   public static onChain(chainId: ChainName | number): Ether {
     const chainId_: ChainName = typeof chainId === 'string' ? chainId : `eip155:${chainId}`

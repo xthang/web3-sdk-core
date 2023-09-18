@@ -1,11 +1,10 @@
-import { ChainName } from './network'
 import { Token } from './token'
 
 /**
  * Known WETH9 implementation addresses, used in our implementation of Ether#wrapped
  */
 // export const WETH9: { [key in `eip155:${1 | 3 | 4 | 5 | 42 | 10 | 69 | 42161 | 421611}`]: Token } = {
-export const WETH9: { [chainId: ChainName]: Token } = {
+export const WETH9: { [chainId: string]: Token } = {
   ['eip155:1']: new Token('eip155:1', '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2', 18, 'WETH', 'Wrapped Ether'),
   ['eip155:3']: new Token('eip155:3', '0xc778417E063141139Fce010982780140Aa0cD5Ab', 18, 'WETH', 'Wrapped Ether'),
   ['eip155:4']: new Token('eip155:4', '0xc778417E063141139Fce010982780140Aa0cD5Ab', 18, 'WETH', 'Wrapped Ether'),
@@ -28,5 +27,5 @@ export const WETH9: { [chainId: ChainName]: Token } = {
     18,
     'WETH',
     'Wrapped Ether'
-  ),
+  )
 }

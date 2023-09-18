@@ -9,9 +9,9 @@ export enum ChainNamespace {
   tron = 'tron'
 }
 
-export type ChainName = `${string}:${string}`
+export type ChainName = string // `${string}:${string}`
 
 export enum NetworkLayer {
   L1,
-  L2,
+  L2
 }
